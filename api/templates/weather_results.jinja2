@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lan="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="/static/weatherstyles.css" />
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <img src="http://openweathermap.org/img/wn/{{data.icon}}@2x.png" alt="" srcset="" id="weather-icon">
+                <div id="location">{{data.place}}</div>
+                <div class="desc">{{data.desc}}</div>
+                <div class="weather">
+                    <div class="c">{{data.temp}}&#8451</div>
+                </div>
+                <div class="info">
+                    <h4>Sunrise: <span class="sunrise">{{data.sunrise}}</span></h4>
+                    <h4>Sunset: <span class="sunset">{{data.sunset}}</span></h4>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2>Here's what you have lined up!</h2>
+                {% for entry in events %}
+                    <div class="event"> {{ entry[0] }} - {{ entry[1] }}. </div>
+                {% endfor %}
+                <div id="list"></div>
+            </div>
+    </body>
+</html>

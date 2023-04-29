@@ -1,5 +1,3 @@
-import time
-from flask import Flask
 from flask import Flask, request, jsonify, redirect, abort, render_template, Response
 import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -13,11 +11,11 @@ import tzlocal
 import requests
 import json
 
+
 app = Flask(__name__)
 cal_count = 0
 complete_events = []
 
-@app.route('/time')
 def get_calendar():
     global cal_count
     global complete_events
@@ -53,27 +51,22 @@ def get_calendar():
         #for event in events:
         #    start = event['start'].get('dateTime', event['start'].get('date'))
         # print(start, event['summary'])
-        i = 1
         for event in events:
             start = event['start'].get('dateTime', event['start'].get('date'))
             stime = datetime.strftime(dtparse(start), format=tmfmt)
             complete_events.append(
                                     (
-                                        str(i) +
-                                        ". " +
-                                        stime +
-                                        ": " +
-                                        event["summary"] +
-                                        "  "
+                                        stime,
+                                        event["summary"]
                                     )
                                 )
-            i += 1
         cal_count += 1
  #   event_start = [event['start'].get('dateTime', event['start'].get('date')) for event in events]
  #   event_list = [event["summary"] for event in events]
     
-    return {'time': complete_events}
-
+        return
+    else:
+        return
 
 @app.route("/weather", methods=['GET','POST'])
 def get_weather():
@@ -112,3 +105,6 @@ def get_weather():
 #    data = request.get_json()
 #    print(data)
 #    return render_template("geo.html")
+
+if __name__ == '__main__':
+    app.run(debug=True)

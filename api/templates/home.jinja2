@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="/static/homestyle.css" />
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="container">
+            <h2>Enter City and Country</h2>    
+            <form id="entry" method="post">
+                <label><b>City</b></label>
+                <input type="text" id="city" name="city" placeholder="Manchester">
+                <br><br>
+                <label><b>Country</b></label>
+                <input type="text" id="country" name="country" placeholder="GB">
+                <br><br>
+                <input type="submit" name="but" id="but" value="Get Weather">
+            </form>
+            </div>
+            <div class="container">
+                <h2>Here's what you have lined up!</h2>
+                {% for entry in events %}
+                    <div class="event"> {{ entry[0] }} - {{ entry[1] }}. </div>
+                {% endfor %}
+                <div id="list"></div>
+            </div>
+        </div>
+    </body>
+</html>
