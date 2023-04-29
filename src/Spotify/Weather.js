@@ -1,65 +1,70 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import { useState } from "react";
+
+const api = {
+    key: "f49f744b773835aaa779317ef1712279",
+    base: "https://api.openweathermap.org/data/2.5/",
+};
 
 function Weather() {
-    const [data, setData] = useState({})
-    const [location, setLocation] = useState('')
+    const [search, setSearch] = useState("");
+    const [weather, setWeather] = useState({});
+    const [defaultWeather, setDefaultWeather] = useState({});
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=895284fb2d2c50a520ea537456963d9c`
-    const url = 'http://api.openweathermap.org/data/2.5/weather?appid={api_key}&q={city},{country}&units=metric'
-    const searchLocation = (event) => {
-        if (event.key === 'Enter') {
-            axios.get(url).then((response) => {
-                setData(response.data)
-                console.log(response.data)
-            })
-            setLocation('')
-        }
-    }
+    /*
+      Search button is pressed. Make a fetch call to the Open Weather Map API.
+    */
+    const searchPressed = () => {
+        fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
+            .then((res) => res.json())
+            .then((result) => {
+                setWeather(result);
+            });
+    };
+
 
     return (
-        <div className="app">
-            <div className="search">
-                <input
-                    value={location}
-                    onChange={event => setLocation(event.target.value)}
-                    onKeyPress={searchLocation}
-                    placeholder='Enter Location'
-                    type="text" />
-            </div>
-            <div className="container">
-                <div className="top">
-                    <div className="location">
-                        <p>{data.name}</p>
-                    </div>
-                    <div className="temp">
-                        {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
-                    </div>
-                    <div className="description">
-                        {data.weather ? <p>{data.weather[0].main}</p> : null}
-                    </div>
+        <div style={{ paddingLeft: 30 }}>
+            <header style={{ color: '#1db954' }}>
+                {/* HEADER  */}
+                <h1 style={{ fontSize: 40 }}>Check the weather!</h1>
+
+                {/* Search Box - Input + Button  */}
+                <div style={{ paddingTop: 4 }}>
+                    <input
+                        type="text"
+                        placeholder="Enter city/town..."
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <button onClick={searchPressed}>Search</button>
                 </div>
 
-                {data.name !== undefined &&
-                    <div className="bottom">
-                        <div className="feels">
-                            {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°F</p> : null}
-                            <p>Feels Like</p>
-                        </div>
-                        <div className="humidity">
-                            {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
-                            <p>Humidity</p>
-                        </div>
-                        <div className="wind">
-                            {data.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
-                            <p>Wind Speed</p>
-                        </div>
+                {/* If weather is not undefined display results from API */}
+                {typeof weather.main !== "undefined" ? (
+                    <div style={{ paddingTop: 4, fontSize: 30 }}>
+                        {/* Location  */}
+                        <p>City: {weather.name}</p>
+
+                        {/* Temperature Celsius  */}
+                        <p>Temperature: {weather.main.temp}°C</p>
+
+                        {/* Condition (Sunny ) */}
+                        <p>Condition: {weather.weather[0].main}</p>
+                        <p>Description: ({weather.weather[0].description})</p>
                     </div>
-                }
+                ) : (
+                    <div style={{ paddingTop: 4, fontSize: 30 }}>
+                        {/* Location  */}
+                        <p>City: </p>
 
+                        {/* Temperature Celsius  */}
+                        <p>Temperature: </p>
 
-
-            </div>
+                        {/* Condition (Sunny ) */}
+                        <p>Condition: </p>
+                        <p>Description: </p>
+                    </div>
+                )}
+            </header>
         </div>
     );
 }

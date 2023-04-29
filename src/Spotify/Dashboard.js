@@ -10,7 +10,7 @@ import Container from "react-bootstrap/Container"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Clock from "./Clock";
-import { CPUGridLayer } from "deck.gl";
+import Weather from "./Weather";
 
 
 const spotifyApi = new SpotifyWebApi({
@@ -91,6 +91,22 @@ export default function Dashboard({ code }) {
         });
     }, []);
 
+    useEffect(() => {
+        fetch('/weather').then(res => res.json()).then(data => {
+            //const doubled = data.time.map((number) => number);
+            setCurrentTime(data.time[0]);
+            setCurrentTime1(data.time[1]);
+            setCurrentTime2(data.time[2]);
+            setCurrentTime3(data.time[3]);
+            setCurrentTime4(data.time[4]);
+            setCurrentTime5(data.time[5]);
+            setCurrentTime6(data.time[6]);
+            setCurrentTime7(data.time[7]);
+            setCurrentTime8(data.time[8]);
+            setCurrentTime9(data.time[9]);
+        });
+    }, []);
+
     return (
         <div
             style={{ backgroundColor: "black", height: "200vh" }}>
@@ -99,35 +115,37 @@ export default function Dashboard({ code }) {
                     <div style={{ color: '#1db954', fontSize: 40 }}>
                         Here are your list of events lined up!
                     </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime1}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime2}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime3}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime4}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime5}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime6}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime7}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime8}
-                    </div>
-                    <div style={{ color: '#1db954' }}>
-                        {currentTime9}
+                    <div style={{ fontSize: 30 }}>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime1}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime2}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime3}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime4}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime5}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime6}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime7}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime8}
+                        </div>
+                        <div style={{ color: '#1db954' }}>
+                            {currentTime9}
+                        </div>
                     </div>
                 </Col>
                 <Col>
@@ -136,30 +154,34 @@ export default function Dashboard({ code }) {
                     </div>
                 </Col>
             </Row>
-
-            <div >
-                <Form.Control
-                    type="search"
-                    placeholder="Search Songs/Artists"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                />
-                <div >
-                    <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+            <Weather />
+            <Container className="d-flex flex-column py-2" style={{ height: "30vh" }}>
+                <div>
+                    <Form.Control
+                        type="search"
+                        placeholder="Search Songs/Artists"
+                        color="#1db954"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        style={{ backgroundColor: "black", color: "#1db954", height: 80, fontSize: 40 }}
+                    />
+                    <div >
+                        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+                    </div>
+                    <div className="flex-grow-1 my-2" style={{
+                        overflowY:
+                            "auto"
+                    }}>
+                        {searchResults.map(track => (
+                            <TrackSearchResult
+                                track={track}
+                                key={track.uri}
+                                chooseTrack={chooseTrack}
+                            />
+                        ))}
+                    </div>
                 </div>
-                <div className="flex-grow-1 my-2" style={{
-                    overflowY:
-                        "auto"
-                }}>
-                    {searchResults.map(track => (
-                        <TrackSearchResult
-                            track={track}
-                            key={track.uri}
-                            chooseTrack={chooseTrack}
-                        />
-                    ))}
-                </div>
-            </div>
+            </Container>
         </div>
     )
 }
