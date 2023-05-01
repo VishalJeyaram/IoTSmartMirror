@@ -23,10 +23,10 @@ function Weather() {
 
 
     return (
-        <div style={{ paddingLeft: 30 }}>
+        <div style={{ paddingLeft: 20 }}>
             <header style={{ color: '#1db954' }}>
                 {/* HEADER  */}
-                <h1 style={{ fontSize: 40 }}>Check the weather!</h1>
+                <div style={{ fontSize: 40, color: "#0000FF" }}>Check the weather!</div>
 
                 {/* Search Box - Input + Button  */}
                 <div style={{ paddingTop: 4 }}>
@@ -34,13 +34,14 @@ function Weather() {
                         type="text"
                         placeholder="Enter city/town..."
                         onChange={(e) => setSearch(e.target.value)}
+                        style={{ height: 80, fontSize: 40 }}
                     />
-                    <button onClick={searchPressed}>Search</button>
+                    <button style={{ height: 80, fontSize: 40 }} onClick={searchPressed}>Search</button>
                 </div>
 
                 {/* If weather is not undefined display results from API */}
                 {typeof weather.main !== "undefined" ? (
-                    <div style={{ paddingTop: 4, fontSize: 30 }}>
+                    <div style={{ paddingTop: 4, fontSize: 40 }}>
                         {/* Location  */}
                         <p>City: {weather.name}</p>
 
@@ -52,7 +53,7 @@ function Weather() {
                         <p>Description: ({weather.weather[0].description})</p>
                     </div>
                 ) : (
-                    <div style={{ paddingTop: 4, fontSize: 30 }}>
+                    <div style={{ paddingTop: 4, fontSize: 40 }}>
                         {/* Location  */}
                         <p>City: </p>
 

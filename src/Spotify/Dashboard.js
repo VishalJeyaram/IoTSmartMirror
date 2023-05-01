@@ -112,10 +112,10 @@ export default function Dashboard({ code }) {
             style={{ backgroundColor: "black", height: "200vh" }}>
             <Row>
                 <Col style={{ paddingLeft: 30, paddingTop: 30 }}>
-                    <div style={{ color: '#1db954', fontSize: 40 }}>
+                    <div style={{ color: '#0000FF', fontSize: 40 }}>
                         Here are your list of events lined up!
                     </div>
-                    <div style={{ fontSize: 30 }}>
+                    <div style={{ fontSize: 40 }}>
                         <div style={{ color: '#1db954' }}>
                             {currentTime}
                         </div>
@@ -149,7 +149,7 @@ export default function Dashboard({ code }) {
                     </div>
                 </Col>
                 <Col>
-                    <div style={{ paddingLeft: 500, backgroundColor: "black", color: "#1db954" }}>
+                    <div style={{ paddingLeft: 800, backgroundColor: "black", color: "#1db954" }}>
                         <Clock></Clock>
                     </div>
                 </Col>
@@ -182,6 +182,11 @@ export default function Dashboard({ code }) {
                     </div>
                 </div>
             </Container>
+            <div style={{ textAlign: "right", color: "#1db954", height: 80, fontSize: 40, backgroundColor: "black", paddingRight: 60 }}>
+                <a href="http://127.0.0.1:5500/index.html" target="_blank" rel="noopener noreferrer">
+                    <button style={{ color: "#1db954", backgroundColor: "black", borderBlockColor: "#1db954" }}>Open Your Maps!</button>
+                </a>
+            </div>
         </div>
     )
 }
