@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project was developed for the module LH The Internet of Things (30065) at The University of Birmingham
+
 There are three main components of the app that need to be run
 
 1. In the project directory (react-flask-app), you can run:
