@@ -6,7 +6,7 @@ This project was developed for the module LH The Internet of Things (30065) at T
 
 Once you have cloned the repo, you need to do the following steps. There are three main components of the app that need to be run.
 
-This is what the smart mirror is envisioned to look like 😂. 
+This is what the smart mirror interface is somewhat supposed to look like. I tried my best to make my laptop screen look like a mirror 😂.   
 ![image](https://github.com/user-attachments/assets/4a9a3b73-2778-43cb-87c1-c3c178b691f7)
 
 
