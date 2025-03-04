@@ -1,4 +1,4 @@
-# Getting Started with the smart mirror
+# LH The Internet of Things (30065) Group 6, Year 3 Academic Year 2022-2023, Semester 2 (Exchange Semester), The University of Birmingham 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
